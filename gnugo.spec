@@ -1,5 +1,5 @@
 %define version	3.6
-%define release %mkrel 3
+%define release %mkrel 4
 
 %define chinese_rules 0
 %{?_with_chinese: %global chinese_rules 1}
@@ -16,7 +16,8 @@ Patch0:		gnugo-3.6-readline.patch.bz2
 Url:		http://www.gnu.org/software/gnugo/
 BuildRequires:	ncurses-devel
 BuildRequires:	readline-devel
-Prereq:		info-install
+Requires(post):		info-install
+Requires(preun):		info-install
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
@@ -63,7 +64,7 @@ echo "(autoload 'gnugo \"gnugo\" \"GNU Go\" t)" > %{buildroot}%{_sysconfdir}/ema
 %post
 %_install_info gnugo.info
 
-%postun
+%preun
 %_remove_install_info gnugo.info
 
 %clean
