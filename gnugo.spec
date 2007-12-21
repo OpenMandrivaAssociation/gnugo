@@ -18,6 +18,7 @@ BuildRequires:	ncurses-devel
 BuildRequires:	readline-devel
 Requires(post):		info-install
 Requires(preun):		info-install
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 Go is a game of strategy between two players usually played on a 
