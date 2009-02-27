@@ -1,5 +1,5 @@
 %define version	3.6
-%define release %mkrel 7
+%define release %mkrel 8
 
 %define chinese_rules 0
 %{?_with_chinese: %global chinese_rules 1}
@@ -10,15 +10,16 @@ Version:	%{version}
 Release:	%{release}
 License:	GPL 
 Group:		Games/Boards
+Url:		http://www.gnu.org/software/gnugo/
 Source0:	ftp://ftp.gnu.org/gnu/%{name}/%{name}-%{version}.tar.gz
 Source1:	ftp://ftp.gnu.org/gnu/%{name}/%{name}-%{version}.tar.gz.sig
-Patch0:		gnugo-3.6-readline.patch.bz2
-Url:		http://www.gnu.org/software/gnugo/
+Patch0:		gnugo-3.6-readline.patch
+Patch1:		gnugo-3.6-fix-format-errors.patch
 BuildRequires:	ncurses-devel
 BuildRequires:	readline-devel
 Requires(post):		info-install
 Requires(preun):		info-install
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRoot:	%{_tmppath}/%{name}-%{version}
 
 %description
 Go is a game of strategy between two players usually played on a 
@@ -36,11 +37,11 @@ Build Options:
 
 %prep
 %setup -q
-%patch0 -p0 -b .readline
-
-autoconf
+%patch0 -p 0 -b .readline
+%patch1 -p 1 -b .format
 
 %build
+autoconf
 %configure2_5x \
 	--bindir=%{_gamesbindir}	\
 	--enable-color			\
