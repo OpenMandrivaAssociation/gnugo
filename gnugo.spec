@@ -1,5 +1,5 @@
-%define version	3.6
-%define release %mkrel 9
+%define version	3.8
+%define release %mkrel 1
 
 %define chinese_rules 0
 %{?_with_chinese: %global chinese_rules 1}
@@ -8,13 +8,12 @@ Summary:	The GNU program to play the game of Go
 Name:		gnugo
 Version:	%{version}
 Release:	%{release}
-License:	GPL 
+License:	GPLv3+ 
 Group:		Games/Boards
 Url:		http://www.gnu.org/software/gnugo/
 Source0:	ftp://ftp.gnu.org/gnu/%{name}/%{name}-%{version}.tar.gz
 Source1:	ftp://ftp.gnu.org/gnu/%{name}/%{name}-%{version}.tar.gz.sig
-Patch0:		gnugo-3.6-readline.patch
-Patch1:		gnugo-3.6-fix-format-errors.patch
+Patch0:		gnugo-3.8-fix-format-errors.patch
 BuildRequires:	ncurses-devel
 BuildRequires:	readline-devel
 Requires(post):		info-install
@@ -37,8 +36,7 @@ Build Options:
 
 %prep
 %setup -q
-%patch0 -p 0 -b .readline
-%patch1 -p 1 -b .format
+%patch0 -p 1 -b .format
 
 %build
 autoconf
