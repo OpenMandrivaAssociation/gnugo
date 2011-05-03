@@ -1,5 +1,5 @@
 %define version	3.8
-%define release %mkrel 2
+%define release %mkrel 3
 
 %define chinese_rules 0
 %{?_with_chinese: %global chinese_rules 1}
