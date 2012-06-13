@@ -1,24 +1,18 @@
-%define version	3.8
-%define release %mkrel 3
-
 %define chinese_rules 0
 %{?_with_chinese: %global chinese_rules 1}
 
 Summary:	The GNU program to play the game of Go
 Name:		gnugo
-Version:	%{version}
-Release:	%{release}
-License:	GPLv3+ 
+Version:	3.8
+Release:	4
+License:	GPLv3+
 Group:		Games/Boards
 Url:		http://www.gnu.org/software/gnugo/
 Source0:	ftp://ftp.gnu.org/gnu/%{name}/%{name}-%{version}.tar.gz
 Source1:	ftp://ftp.gnu.org/gnu/%{name}/%{name}-%{version}.tar.gz.sig
 Patch0:		gnugo-3.8-fix-format-errors.patch
-BuildRequires:	ncurses-devel
+BuildRequires:	pkgconfig(ncurses)
 BuildRequires:	readline-devel
-Requires(post):		info-install
-Requires(preun):		info-install
-BuildRoot:	%{_tmppath}/%{name}-%{version}
 
 %description
 Go is a game of strategy between two players usually played on a 
@@ -44,7 +38,7 @@ autoconf
 	--bindir=%{_gamesbindir}	\
 	--enable-color			\
 	--with-readline			\
-%if %chinese_rules
+%if %{chinese_rules}
 	--enable-chinese-rules
 %endif
 
@@ -60,17 +54,7 @@ install -D -m 644 interface/gnugo.el %{buildroot}%{_datadir}/emacs/site-lisp/gnu
 mkdir -p %{buildroot}%{_sysconfdir}/emacs/site-start.d/
 echo "(autoload 'gnugo \"gnugo\" \"GNU Go\" t)" > %{buildroot}%{_sysconfdir}/emacs/site-start.d/gnugo.el
 
-%post
-%_install_info gnugo.info
-
-%preun
-%_remove_install_info gnugo.info
-
-%clean
-rm -rf %{buildroot}
-
 %files
-%defattr(-,root,root)
 %doc AUTHORS COPYING ChangeLog INSTALL NEWS README THANKS TODO 
 %config(noreplace) %{_sysconfdir}/emacs/site-start.d/*.el
 %{_infodir}/*
