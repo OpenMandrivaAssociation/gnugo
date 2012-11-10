@@ -1,0 +1,80 @@
+diff -p -up gnugo-3.8/patterns/dfa.c.format gnugo-3.8/patterns/dfa.c
+--- gnugo-3.8/patterns/dfa.c.format	2009-02-17 22:41:31.000000000 +0100
++++ gnugo-3.8/patterns/dfa.c	2009-11-29 00:46:03.000000000 +0100
+@@ -288,19 +288,19 @@ dump_dfa(FILE *f, dfa_t *pdfa)
+   int i;
+   int att, k;
+ 
+-  fprintf(f, line);
++  fprintf(f, "%s", line);
+   fprintf(f, " name : %s\n", pdfa->name);
+   fprintf(f, " Nb states :  %7d, max= %d\n", pdfa->last_state + 1,
+ 	  pdfa->max_states);
+   fprintf(f, " Nb Indexes : %7d, max= %d\n", pdfa->last_index,
+ 	  pdfa->max_indexes);
+   fprintf(f, " memory needed : %d Mb\n", dfa_size(pdfa) / 1024);
+-  fprintf(f, line);
++  fprintf(f, "%s", line);
+ 
+   if (dfa_size(pdfa) > 10000) /* change this value if needed */
+     return;
+   fprintf(f, " state  |   .    |   O    |   X    |   #    |  att \n");
+-  fprintf(f, line);
++  fprintf(f, "%s", line);
+   for (i = 1; i != pdfa->last_state + 1; i++) {
+     int *pnext = pdfa->states[i].next;
+     fprintf(f, " %6d |", i);
+@@ -318,7 +318,7 @@ dump_dfa(FILE *f, dfa_t *pdfa)
+       fprintf(f, " ...");
+     fprintf(f, "\n");
+   }
+-  fprintf(f, line);
++  fprintf(f, "%s", line);
+   fflush(f);
+ }
+ 
+diff -p -up gnugo-3.8/patterns/mkpat.c.format gnugo-3.8/patterns/mkpat.c
+--- gnugo-3.8/patterns/mkpat.c.format	2009-02-17 22:41:31.000000000 +0100
++++ gnugo-3.8/patterns/mkpat.c	2009-11-29 00:46:03.000000000 +0100
+@@ -1419,7 +1419,7 @@ generate_autohelper_code(int funcno, int
+     /* A common case. Just use the labels as parameters. */
+     switch (number_of_params) {
+     case 0:
+-      code_pos += sprintf(code_pos, autohelper_functions[funcno].code);
++      code_pos += sprintf(code_pos, "%s", autohelper_functions[funcno].code);
+       break;
+     case 1:
+       code_pos += sprintf(code_pos, autohelper_functions[funcno].code,
+diff -p -up gnugo-3.8/patterns/uncompress_fuseki.c.format gnugo-3.8/patterns/uncompress_fuseki.c
+--- gnugo-3.8/patterns/uncompress_fuseki.c.format	2009-11-29 00:47:11.000000000 +0100
++++ gnugo-3.8/patterns/uncompress_fuseki.c	2009-11-29 00:50:11.000000000 +0100
+@@ -224,9 +224,9 @@ main(int argc, char *argv[])
+ 
+   assert(boardsize > 0);
+   if (boardsize > MAX_BOARD) {
+-    printf(output_strings[PREAMBLE]);
++    printf("%s", output_strings[PREAMBLE]);
+     printf(output_strings[HEADER], boardsize);
+-    printf(output_strings[FOOTER]);
++    printf("%s", output_strings[FOOTER]);
+     return EXIT_SUCCESS;
+   }
+   
+@@ -251,7 +251,7 @@ main(int argc, char *argv[])
+     board[k][boardsize + 1] = '|';
+   }
+ 
+-  printf(output_strings[PREAMBLE]);
++  printf("%s", output_strings[PREAMBLE]);
+   printf(output_strings[HEADER], boardsize);
+   
+ 
+@@ -308,7 +308,7 @@ main(int argc, char *argv[])
+   if (mode == C_OUTPUT)
+     write_pattern_c_code(NULL, board1d, NO_MOVE, 0, boardsize, -1);
+   
+-  printf(output_strings[FOOTER]);
++  printf("%s", output_strings[FOOTER]);
+ 
+   return EXIT_SUCCESS;
+ }
