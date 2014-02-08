@@ -4,7 +4,7 @@
 Summary:	The GNU program to play the game of Go
 Name:		gnugo
 Version:	3.8
-Release:	5
+Release:	6
 License:	GPLv3+ 
 Group:		Games/Boards
 Url:		http://www.gnu.org/software/gnugo/
