@@ -11,6 +11,7 @@ Url:		http://www.gnu.org/software/gnugo/
 Source0:	ftp://ftp.gnu.org/gnu/%{name}/%{name}-%{version}.tar.gz
 Source1:	ftp://ftp.gnu.org/gnu/%{name}/%{name}-%{version}.tar.gz.sig
 Patch0:		gnugo-3.8-fix-format-errors.patch
+Patch1:		fix-multiple-link-symbols.patch
 BuildRequires:	readline-devel
 BuildRequires:	pkgconfig(ncurses)
 
