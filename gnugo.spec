@@ -7,7 +7,7 @@ Version:	3.8
 Release:	16
 License:	GPLv3+
 Group:		Games/Boards
-Url:		http://www.gnu.org/software/gnugo/
+Url:		https://www.gnu.org/software/gnugo/
 Source0:	ftp://ftp.gnu.org/gnu/%{name}/%{name}-%{version}.tar.gz
 Patch0:		gnugo-3.8-fix-format-errors.patch
 Patch1:		fix-multiple-link-symbols.patch
